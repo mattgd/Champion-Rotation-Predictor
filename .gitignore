@@ -2,3 +2,9 @@ scrape/keys.*
 connect/core/connect.php
 css/sass/.sass-cache/
 *.swp
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
