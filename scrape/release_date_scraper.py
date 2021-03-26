@@ -3,35 +3,23 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-# import secret keys
-execfile('./keys.py')
 
 url = 'http://leagueoflegends.wikia.com/wiki/List_of_champions'
 
 soup = BeautifulSoup(requests.get(url).text, 'html.parser')
 
-trs = soup.find('table', { 'class': 'stdt' }).findAll('tr')
-
-data = {}
-
-index = 0
-for tr in trs:
-	td = tr.findAll('td')
-	champion = td[0::1]
-        print champion
-	date = td[7::8]
-
-	if len(champion) > 0:
-		champion = champion[0].findAll(text=True)[1]
-		date = date[0].findAll(text=True)[0].rstrip()
-		print(champion + " released on " + date)
-		data[index] = { "champion": champion, "date": date }
-
-		index += 1
-
-# print(json.dumps(data, indent = 4))
-
-data_json = json.dumps(data)
-payload = { 'data': data_json, 'key': update_key }
-r = requests.post('http://localhost/scrape/update_champion.php', data=payload)
-print(r.text)
+#Get the champion table
+trs = soup.find_all('table')[1]
+rows = trs.find_all('tr')
+#Remove table header
+rows.pop(0)
+for r in rows:
+	columns = r.find_all('td')
+	#Get name
+	print(columns[0].find('a')["title"])
+	#Get release date
+	print(columns[2].getText())
+	#Get BE cost
+	print(columns[4].getText())
+	#Get RP cost
+	print(columns[5].getText())
