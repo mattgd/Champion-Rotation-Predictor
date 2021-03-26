@@ -1,0 +1,6 @@
+import os
+
+DEBUG = False
+SECRET_KEY = os.urandom(24)
+SQLALCHEMY_ECHO = False
+SQLALCHEMY_TRACK_MODIFICATIONS = False

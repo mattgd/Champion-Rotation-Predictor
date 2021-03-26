@@ -4,8 +4,10 @@ FROM python:3.9-slim-buster
 # set work directory
 WORKDIR /usr/src/app
 
-# set environment varibles
+# set environment variables
+# prevents python from writing pyc files to disk
 ENV PYTHONDONTWRITEBYTECODE 1
+# prevents python from buffering stdout and stderr
 ENV PYTHONUNBUFFERED 1
 
 # install dependencies
@@ -18,5 +20,8 @@ COPY . /usr/src/app/
 # flask app environment variable
 ENV FLASK_APP app.py
 
+# open port 5000 for requests
+EXPOSE 5000
+
 # start server
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+CMD ["flask", "run", "--host=0.0.0.0"]
