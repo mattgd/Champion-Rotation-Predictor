@@ -4,8 +4,7 @@ from sqlalchemy.orm import relationship
 from app import db
 from .champion_rotation import champion_rotation
 
-CHAMPION_SQUARE_IMAGE_URL_PREFIX = 'https://ddragon.leagueoflegends.com/cdn/5.15.1/img/champion/'
-CHAMPION_TALL_IMAGE_URL_PREFIX = 'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/'
+CHAMPION_IMAGE_URL_PREFIX = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/'
 
 
 class Champion(db.Model):
@@ -26,8 +25,7 @@ class Champion(db.Model):
             'title': self.title,
             'tags': self.tags,
             'dateRelease': self.date_released.isoformat(),
-            'squareImage': '{prefix}{key}.png'.format(prefix=CHAMPION_SQUARE_IMAGE_URL_PREFIX, key=self.key),
-            'tallImage': '{prefix}{key}_0.jpg'.format(prefix=CHAMPION_TALL_IMAGE_URL_PREFIX, key=self.key)
+            'image': '{prefix}{key}_0.jpg'.format(prefix=CHAMPION_IMAGE_URL_PREFIX, key=self.key)
         }
 
     def __repr__(self) -> str:
