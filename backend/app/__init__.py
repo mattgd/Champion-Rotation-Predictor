@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 # Import models for DB schema creation
+from .models.rotation import Rotation
 from .models.champion import Champion
 
 # Build the database:
@@ -22,6 +23,8 @@ from .models.champion import Champion
 db.create_all()
 
 from .views.champions import champions_api
+from .views.rotations import rotations_api
 
 # Register blueprint(s)
 app.register_blueprint(champions_api)
+app.register_blueprint(rotations_api)
