@@ -7,7 +7,8 @@ from bs4 import BeautifulSoup
 from pygrok import Grok
 from datetime import date
 
-from ..models.champion import Champion
+from ..models.rotation import Rotation
+from app import db
 
 def monthToNum(mon):
     return {
@@ -54,7 +55,6 @@ weekNum = 0
 date_pattern = '%{MONTHDAY:day} %{MONTH:month} %{YEAR:year}'
 grok = Grok(date_pattern)
 
-champions = []
 
 for url in hrefList:
 	#Grab HTML
@@ -74,6 +74,8 @@ for url in hrefList:
 		for champ in table.find_all("div", {"data-game": "lol"}):
 			champions.append(champ.find('a')['title'])
 		#Insert into DB
+
+        champion = Champion()
 		print(weekNum, end="  ")
 		print(start_date, end="  ")
 		print(end_date, end="  ")
