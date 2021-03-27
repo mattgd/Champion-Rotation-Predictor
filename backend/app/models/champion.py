@@ -1,3 +1,5 @@
+import re
+
 from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -7,11 +9,19 @@ from .champion_rotation import champion_rotation
 CHAMPION_IMAGE_URL_PREFIX = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/'
 
 
+def generate_key(context) -> str:
+    """
+    Removes all non alphanumeric characters to create the champion key used to get the champion images.
+    """
+    name = context.get_current_parameters()['name']
+    return re.sub(r'\W+', '', name)
+
+
 class Champion(db.Model):
     __tablename__ = 'champions'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
-    key = Column(String(50), unique=True)
+    key = Column(String(50), unique=True, default=generate_key)
     title = Column(String(50))
     tags = Column(String(255))
     date_released = Column(Date)
