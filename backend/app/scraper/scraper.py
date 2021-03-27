@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 from pygrok import Grok
 from datetime import date
 
+from ..models.champion import Champion
+
 def monthToNum(mon):
     return {
             'January' : 1,
@@ -51,6 +53,8 @@ for l in htmlList:
 weekNum = 0
 date_pattern = '%{MONTHDAY:day} %{MONTH:month} %{YEAR:year}'
 grok = Grok(date_pattern)
+
+champions = []
 
 for url in hrefList:
 	#Grab HTML
