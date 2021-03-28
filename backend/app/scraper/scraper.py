@@ -98,8 +98,8 @@ def scrape_rotations():
 
 			# Get the dates for that week
 			dates = table.find('p').getText().replace(u'\xa0', ' ').replace(u'\n', ' ').split(" - ")
-			start_date = toDate(grok.match(dates[0]))
-			end_date = toDate(grok.match(dates[1]))
+			start_date = to_date(grok.match(dates[0]))
+			end_date = to_date(grok.match(dates[1]))
 
 			# Rotation attributes dictionary
 			rotation_attributes = {
