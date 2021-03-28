@@ -36,6 +36,6 @@ app.register_blueprint(rotations_api)
 # Scaper CLI command
 @app.cli.command("scrape-data")
 def scape_data():
-    from .scraper import scraper, release_date_scraper
-    release_date_scraper.scape()
-    scraper.scape()
+    from .scraper import scraper
+    scraper.scrape_champions()
+    scraper.scrape_rotations()
