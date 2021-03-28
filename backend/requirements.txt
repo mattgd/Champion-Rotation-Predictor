@@ -1,5 +1,6 @@
 bs4
 python-dateutil
+flask-cors
 Flask-SQLAlchemy
 flask
 pygrok

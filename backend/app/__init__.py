@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 # Define the WSGI application object
@@ -13,6 +14,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
+
+# Add CORS headers
+CORS(app)
 
 # Import models for DB schema creation
 from .models.rotation import Rotation
