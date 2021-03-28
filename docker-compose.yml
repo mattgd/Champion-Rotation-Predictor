@@ -5,8 +5,6 @@ services:
     build: ./backend
     container_name: champion-rotation-predictor-backend
     command: flask run --host=0.0.0.0
-    volumes:
-      - ./backend/app/database.db:/usr/src/app/app/database.db
     ports:
       - 5000:5000
     environment:
