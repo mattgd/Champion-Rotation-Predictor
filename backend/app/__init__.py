@@ -28,3 +28,10 @@ from .views.rotations import rotations_api
 # Register blueprint(s)
 app.register_blueprint(champions_api)
 app.register_blueprint(rotations_api)
+
+# Scaper CLI command
+@app.cli.command("scrape-data")
+def scape_data():
+    from .scraper import scraper, release_date_scraper
+    release_date_scraper.scape()
+    scraper.scape()

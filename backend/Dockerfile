@@ -23,5 +23,7 @@ ENV FLASK_APP app.py
 # open port 5000 for requests
 EXPOSE 5000
 
+ARG scrape
+
 # start server
-CMD ["flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT ["./entrypoint.sh"]
