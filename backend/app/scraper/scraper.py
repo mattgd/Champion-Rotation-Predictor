@@ -84,3 +84,5 @@ def scape():
 					rotation.champions.append(champion)
 			#Insert into DB
 			db.session.add(rotation)
+
+	db.session.commit()
