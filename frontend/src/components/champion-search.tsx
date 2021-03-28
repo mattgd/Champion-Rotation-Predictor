@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Champion } from '../api';
 import useFetch from 'react-fetch-hook';
-import { Select } from 'grommet';
+import { Button, Select } from 'grommet';
 import { API_URL } from '../api/routes';
+import { RouteComponentProps, navigate } from '@reach/router';
 
-export const ChampionSearch = () => {
+export const ChampionSearch: React.FC<RouteComponentProps> = () => {
   const { isLoading, data } = useFetch<Champion[]>(`${API_URL}/champions/`);
   const [searchOptions, setSearchOptions] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState('');
-
-  const submitSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    // Do the search
-  };
 
   useEffect(() => {
     if (data) {
@@ -39,10 +36,10 @@ export const ChampionSearch = () => {
   
         <Select
           options={searchOptions}
-          value={searchValue}
           onChange={({ option }) => setSearchValue(option)}
           onSearch={handleSearch}
         />
+        <Button primary label="View Champion" onClick={() => navigate(`/champions/${searchValue}`)} />
       </section>
     );
   }
