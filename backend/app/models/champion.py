@@ -22,8 +22,9 @@ class Champion(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
     key = Column(String(50), unique=True, default=generate_key)
-    title = Column(String(50))
-    tags = Column(String(255))
+    subclass = Column(String(30))
+    blue_essence = Column(Integer)
+    riot_points = Column(Integer)
     date_released = Column(Date)
     rotations = relationship('Rotation', secondary=champion_rotation, back_populates='champions')
 
@@ -32,8 +33,9 @@ class Champion(db.Model):
             'id': self.id,
             'name': self.name,
             'key': self.key,
-            'title': self.title,
-            'tags': self.tags,
+            'subclass': self.subclass,
+            'blueEssence': self.blue_essence,
+            'riotPoints': self.riot_points,
             'dateRelease': self.date_released.isoformat(),
             'image': '{prefix}{key}_0.jpg'.format(prefix=CHAMPION_IMAGE_URL_PREFIX, key=self.key)
         }

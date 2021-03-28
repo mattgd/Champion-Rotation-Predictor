@@ -1,13 +1,13 @@
 version: '3.7'
 
 services:
-  web:
+
+  backend:
     build: ./backend
+    image: 'backend'
     container_name: champion-rotation-predictor-backend
-    command: flask run --host=0.0.0.0
+    command: gunicorn --bind 0.0.0.0:8000 app.wsgi
     volumes:
       - ./backend/app/database.db:/usr/src/app/app/database.db
     ports:
-      - 5000:5000
-    environment:
-      - DEBUG=1
+      - '5000:5000'

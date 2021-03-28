@@ -2,8 +2,9 @@ export type Champion = {
     id: number,
     name: string,
     key: string,
-    title: string,
-    tags: string,
+    subclass: string,
+    blueEssence: number,
+    riotPoints: number,
     dateReleased: string,
     image: string,
 }
